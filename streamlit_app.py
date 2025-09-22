@@ -1,40 +1,47 @@
 import streamlit as st
-from auth.login import login_user
-from config.supabase_config import supabase
+from pages.dashboard import dashboard_page
+from pages.invoice import invoice_page
+from pages.setup_service import setup_service_page
 
-st.set_page_config(page_title="Workshop Dashboard", layout="wide")
-
-st.title("🔧 Workshop Dashboard")
-
-# ---------------- Session State ----------------
+# ---------------- SESSION ----------------
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 
-# ---------------- Login Form ----------------
 if not st.session_state["logged_in"]:
-    st.subheader("Please Login")
+    st.title("Bengkel Staff Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        success, user_username = login_user(username, password)
-        if success:
+        # TODO: tukar dengan login_user()
+        if username == "admin" and password == "1234":
             st.session_state["logged_in"] = True
-            st.session_state["user_username"] = user_username
-            st.success(f"Welcome {user_username}!")
-            st.experimental_rerun()
+            st.session_state["user_username"] = username
+            st.success(f"Welcome {username}!")
         else:
             st.error("Login failed!")
 
-# ---------------- Dashboard ----------------
 else:
-    st.sidebar.title("📂 Navigation")
-    choice = st.sidebar.radio("Go to:", ["Dashboard", "Invoice", "Customer Management"])
+    # ---------------- SIDEBAR ----------------
+    st.sidebar.title("📌 Menu")
 
-    if choice == "Dashboard":
-        st.header("Welcome to Dashboard 👋")
-        st.info("Please select a module from the sidebar.")
+    menu = st.sidebar.radio(
+        "Navigate",
+        ["Dashboard", "Invoice", "Setup"],
+        label_visibility="collapsed"
+    )
 
-    elif choice == "Invoice":
-        from pages.invoice import invoice_page
+    if menu == "Dashboard":
+        dashboard_page()
+    elif menu == "Invoice":
         invoice_page()
+    elif menu == "Setup":
+        st.sidebar.subheader("⚙️ Setup Options")
+        setup_menu = st.sidebar.radio(
+            "Setup Menu",
+            ["Jenis Servis"],
+            label_visibility="collapsed"
+        )
+
+        if setup_menu == "Jenis Servis":
+            setup_service_page()
