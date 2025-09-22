@@ -4,7 +4,6 @@ from config.supabase_config import supabase
 from datetime import datetime
 
 st.title("Bengkel Staff Login")
-st.write("SUPABASE URL:", st.secrets["SUPABASE_URL"])
 
 # ---------------- Login Form ----------------
 if "logged_in" not in st.session_state:
@@ -16,15 +15,12 @@ if not st.session_state["logged_in"]:
 
     if st.button("Login"):
         success, user_username = login_user(username, password)
-        st.write("DEBUG RESULT:", success, user_username)  # 🔍 Tengok apa keluar
         if success:
             st.session_state["logged_in"] = True
             st.session_state["user_username"] = user_username
             st.success(f"Welcome {user_username}!")
         else:
             st.error("Login failed!")
-
-
 
 # ---------------- Job Sheet Form ----------------
 if st.session_state["logged_in"]:
@@ -50,7 +46,7 @@ if st.session_state["logged_in"]:
                 "labour_charge": labour,
                 "sparepart_cost": spare,
                 "total_cost": total,
-                "created_at": datetime.now()
+                "created_at": datetime.now().isoformat()
             }).execute()
             
             st.success(f"Job submitted! Invoice No: {job_number}, Total RM {total}")
