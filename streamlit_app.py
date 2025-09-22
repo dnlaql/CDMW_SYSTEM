@@ -14,13 +14,15 @@ if not st.session_state["logged_in"]:
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        success, user_username = login_user(username, password)
-        if success:
-            st.session_state["logged_in"] = True
-            st.session_state["user_username"] = user_username
-            st.success(f"Welcome {user_username}!")
-        else:
-            st.error("Login failed!")
+    success, user_username = login_user(username, password)
+    st.write("DEBUG RESULT:", success, user_username)  # 🔍 Tengok apa keluar
+    if success:
+        st.session_state["logged_in"] = True
+        st.session_state["user_username"] = user_username
+        st.success(f"Welcome {user_username}!")
+    else:
+        st.error("Login failed!")
+
 
 # ---------------- Job Sheet Form ----------------
 if st.session_state["logged_in"]:
