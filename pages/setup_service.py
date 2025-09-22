@@ -16,18 +16,12 @@ def setup_service_page():
             st.success(f"Servis '{new_service}' ditambah!")
             st.experimental_rerun()
 
-    # --- List Services ---
+    # --- List Services dalam table ---
     services = supabase.table(TABLE).select("*").order("id").execute().data
 
     if services:
-        for svc in services:
-            col1, col2 = st.columns([3,1])
-            with col1:
-                st.write(f"- {svc['name']}")
-            with col2:
-                if st.button("❌", key=f"del_{svc['id']}"):
-                    supabase.table(TABLE).delete().eq("id", svc["id"]).execute()
-                    st.warning(f"Servis '{svc['name']}' dipadam!")
-                    st.experimental_rerun()
+        # Tukar ke list of dict untuk dataframe
+        service_data = [{"ID": svc["id"], "Nama Servis": svc["name"], "Dibuat Pada": svc["created_at"]} for svc in services]
+        st.table(service_data)  # atau st.dataframe(service_data) untuk sortable
     else:
-        st.info("Tiada servis lagi. Sila tambah baru.")
+        st.info("Tiada servis lagi. Sila tambah servis baru.")
