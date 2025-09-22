@@ -1,3 +1,5 @@
+from config.supabase_config import supabase
+
 def login_user(username, password):
     username = username.strip()
     password = password.strip()
