@@ -11,7 +11,7 @@ def login_user(username, password):
         .execute()
 
     print("DEBUG INPUT:", username, password)
-    print("DEBUG RESPONSE:", res)
+    print("DEBUG RESPONSE:", res.data)
 
     if res.data and len(res.data) > 0:
         return True, username
