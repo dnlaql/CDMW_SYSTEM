@@ -1,13 +1,6 @@
-from config.supabase_config import supabase
-
 def login_user(username, password):
-    """
-    Check user login based on table 'user'
-    Return True + username kalau berjaya, False kalau gagal
-    """
-    res = supabase.table("user").select("*").eq("username", username).eq("password", password).execute()
-    print("DEBUG QUERY:", username, password)   # tengok input
-    print("DEBUG RESULT:", res.data)            # tengok output
+    res = supabase.table("user").select("*").eq("username", username).execute()
+    print("DEBUG USERNAME ONLY:", res.data)
 
     if res.data and len(res.data) > 0:
         return True, username
