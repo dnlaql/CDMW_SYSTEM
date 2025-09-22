@@ -4,6 +4,7 @@ from config.supabase_config import supabase
 from datetime import datetime
 
 st.title("Bengkel Staff Login")
+st.write("SUPABASE URL:", st.secrets["SUPABASE_URL"])
 
 # ---------------- Login Form ----------------
 if "logged_in" not in st.session_state:
