@@ -10,15 +10,15 @@ if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 
 if not st.session_state["logged_in"]:
-    email = st.text_input("Email")
+    username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
     if st.button("Login"):
-        success, user_email = login_user(email, password)
+        success, user_username = login_user(username, password)
         if success:
             st.session_state["logged_in"] = True
-            st.session_state["user_email"] = user_email
-            st.success(f"Welcome {user_email}!")
+            st.session_state["user_username"] = user_username
+            st.success(f"Welcome {user_username}!")
         else:
             st.error("Login failed!")
 
