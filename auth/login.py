@@ -5,7 +5,7 @@ def login_user(username, password):
     Check user login from table 'user_test'
     Return True + username kalau berjaya, False kalau gagal
     """
-    res = supabase.table("user_test").select("*").eq("username", username).eq("password", password).execute()
+    res = supabase.table("user_test").select("*").ilike("username", username).ilike("password", password).execute()
 
     # Debug kalau nak tengok apa Supabase return
     # print("DEBUG LOGIN:", res)
