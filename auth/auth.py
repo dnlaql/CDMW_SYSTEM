@@ -1,4 +1,4 @@
-from supabase_config import supabase
+from config.supabase_config import supabase
 
 def login_user(username, password):
     """
