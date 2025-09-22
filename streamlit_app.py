@@ -1,5 +1,5 @@
 import streamlit as st
-from auth.auth import login_user
+from auth.login.py import login_user
 from config.supabase_config import supabase
 from datetime import datetime
 
