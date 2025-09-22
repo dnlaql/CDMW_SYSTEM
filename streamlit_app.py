@@ -29,7 +29,7 @@ if not st.session_state["logged_in"]:
 # ---------------- Dashboard ----------------
 else:
     st.sidebar.title("📂 Navigation")
-    choice = st.sidebar.radio("Go to:", ["Dashboard", "Invoice"])
+    choice = st.sidebar.radio("Go to:", ["Dashboard", "Invoice, "Customer Management])
 
     if choice == "Dashboard":
         st.header("Welcome to Dashboard 👋")
