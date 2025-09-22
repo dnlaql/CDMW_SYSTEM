@@ -6,6 +6,9 @@ def login_user(username, password):
     Return True + username kalau berjaya, False kalau gagal
     """
     res = supabase.table("user").select("*").eq("username", username).eq("password", password).execute()
+    print("DEBUG QUERY:", username, password)   # tengok input
+    print("DEBUG RESULT:", res.data)            # tengok output
+
     if res.data and len(res.data) > 0:
         return True, username
     else:
