@@ -8,7 +8,7 @@ def invoice_page():
     with st.form("job_form"):
         customer = st.text_input("Nama Customer")
         plate = st.text_input("Plat Kereta")
-        service = st.selectbox("Jenis Servis", ["Oil Change", "Brake Service", "Tires"])
+        service = st.selectbox("Jenis Servis", ["Oil Change", "Brake Service", "Tires, Battery"])
         labour = st.number_input("Labour Charge (RM)", 0)
         spare = st.number_input("Sparepart Cost (RM)", 0)
         
