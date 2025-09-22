@@ -1,6 +1,6 @@
 import streamlit as st
-from auth import login_user
-from supabase_config import supabase
+from auth.auth import login_user
+from config.supabase_config import supabase
 from datetime import datetime
 
 st.title("Bengkel Staff Login")
